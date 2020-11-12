@@ -43,6 +43,13 @@ recvThread.start()
 
 # CREATE FUNCTIONS HERE....
 
+# square function with a for loop
+def square():
+    for i in range(4):
+        sendmsg('foward 100')
+        sendmsg('cw 90')
+
+
 
 print("\nAlex Symanzik")
 print("Program Name: Drone Flying School")
@@ -59,13 +66,7 @@ try:
         sendmsg('command', 0)
         sendmsg('takeoff')
 
-        # Make a square
-        
-        for i in range(4):
-            sendmsg('foward 100')
-            sendmsg('cw 90')
-
-
+        square()
 
         sendmsg('land')
 
