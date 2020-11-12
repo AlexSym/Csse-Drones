@@ -60,11 +60,11 @@ try:
         sendmsg('takeoff')
 
         # Make a square
-        county = 0
-        while county > 4:
+        
+        for i in range(4):
             sendmsg('foward 100')
             sendmsg('cw 90')
-            county+1
+
 
 
         sendmsg('land')
