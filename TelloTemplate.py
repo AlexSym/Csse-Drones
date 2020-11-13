@@ -4,14 +4,11 @@
 
 import threading, socket, sys, time, subprocess
 
-
 # GLOBAL VARIABLES DECLARED HERE....
 host = ''
 port = 9000
-locaddr = (host,port)
-tello_address = ('192.168.10.1', 8889) # Get the Tello drone's address
-
-
+locaddr = (host, port)
+tello_address = ('192.168.10.1', 8889)  # Get the Tello drone's address
 
 # Creates a UDP socketd
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -26,15 +23,16 @@ def recv():
             data, server = sock.recvfrom(1518)
             print(data.decode(encoding="utf-8"))
         except Exception:
-            print ('\n****Keep Eye on Drone****\n')
+            print('\n****Keep Eye on Drone****\n')
             break
 
 
-def sendmsg(msg, sleep = 6):
+def sendmsg(msg, sleep=6):
     print("Sending: " + msg)
     msg = msg.encode(encoding="utf-8")
     sock.sendto(msg, tello_address)
     time.sleep(sleep)
+
 
 # recvThread create
 recvThread = threading.Thread(target=recv)
@@ -50,6 +48,23 @@ def square():
         sendmsg('cw 90')
 
 
+def hoop1():
+    sendmsg("up 60")
+    sendmsg("forward 170")
+
+def hoop2():
+    sendmsg("down 10")
+    sendmsg("forward 50")
+
+def hoop3():
+    sendmsg("ccw 90")
+    sendmsg("forward 130")
+    sendmsg("ccw 90")
+    sendmsg("forward 50")
+def hoop4():
+    sendmsg("forward 170")
+    sendmsg("ccw 90")
+    sendmsg("forward 130")
 
 print("\nAlex Symanzik")
 print("Program Name: Drone Flying School")
@@ -58,7 +73,6 @@ print("\n****CHECK YOUR TELLO WIFI ADDRESS****")
 print("\n****CHECK SURROUNDING AREA BEFORE FLIGHT****")
 ready = input('\nAre you ready to take flight: ')
 
-
 try:
     if ready.lower() == 'yes' or ready.lower() == 'y':
         print("\nStarting Drone!\n")
@@ -66,7 +80,12 @@ try:
         sendmsg('command', 0)
         sendmsg('takeoff')
 
-        square()
+        # square()
+
+        hoop1()
+        hoop2()
+        hoop3()
+        hoop4()
 
         sendmsg('land')
 
