@@ -43,14 +43,14 @@ recvThread.start()
 
 # Drone mission through first hoop
 def hoop1():
-    sendmsg("up 60")
+    sendmsg("up 70")
     sendmsg("forward 170")
 
 
 # Drone mission through second hoop
 def hoop2():
-    sendmsg("down 10")
-    sendmsg("forward 50")
+    sendmsg("down 30")
+    sendmsg("forward 150")
 
 
 # Drone mission through third hoop
@@ -63,14 +63,15 @@ def hoop3():
 
 # drone mission through fourth hoop.
 def hoop4():
+    sendmsg("up 10")
     sendmsg("forward 170")
     sendmsg("ccw 90")
     sendmsg("forward 130")
 
 
 print("\nAlex Symanzik")
-print("Program Name: Drone Flying School")
-print("Date: 11/6/2020")
+print("Program Name: Drone Flying Comp")
+print("Date: 11/13/2020")
 print("\n****CHECK YOUR TELLO WIFI ADDRESS****")
 print("\n****CHECK SURROUNDING AREA BEFORE FLIGHT****")
 ready = input('\nAre you ready to take flight: ')
@@ -83,7 +84,7 @@ try:
         sendmsg('takeoff')
 
         hoop1()
-        hoop2()
+        # hoop2()
         # hoop3()
         # hoop4()
 
