@@ -50,14 +50,16 @@ def hoop1():
 # Drone mission through second hoop
 def hoop2():
     sendmsg("up 10")
-    sendmsg("forward 150")
+    sendmsg("forward 180")
 
 
 # Drone mission through third hoop
 def hoop3():
-    sendmsg("forward 20")
+    sendmsg("forward 50")
     sendmsg("ccw 90")
-    sendmsg("forward 150")
+    sendmsg("forward 170")
+    sendmsg("ccw 90")
+    sendmsg("forward 230")
 
 
 def hoop4():
@@ -80,7 +82,7 @@ try:
 
         hoop1()
         hoop2()
-        # hoop3()
+        hoop3()
         # hoop4()
 
         sendmsg('land')
