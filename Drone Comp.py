@@ -6,7 +6,7 @@ import threading, socket, sys, time, subprocess
 
 # GLOBAL VARIABLES DECLARED HERE....
 host = ''
-port = 9000
+port = 8000
 locaddr = (host, port)
 tello_address = ('192.168.10.1', 8889)  # Get the Tello drone's address
 
@@ -49,7 +49,7 @@ def hoop1():
 
 # Drone mission through second hoop
 def hoop2():
-    sendmsg("go 300 130 0 200")
+    sendmsg("go 300 0 65 50", 9)
 
 
 
@@ -66,26 +66,27 @@ print("Program Name: Drone Flying Comp")
 print("Date: 11/13/2020")
 print("\n****CHECK YOUR TELLO WIFI ADDRESS****")
 print("\n****CHECK SURROUNDING AREA BEFORE FLIGHT****")
-ready = input('\nAre you ready to take flight: ')
+#ready = input('\nAre you ready to take flight: ')
 
 try:
-    if ready.lower() == 'yes' or ready.lower() == 'y':
-        print("\nStarting Drone!\n")
+    print("\nStarting Drone!\n")
 
-        sendmsg('command', 0)
-        sendmsg('takeoff')
+    sendmsg('command', 0)
+    sendmsg('takeoff')
 
-        hoop1()
-        hoop2()
-        #hoop3()
-        # hoop4()
+    hoop1()
+    hoop2()
+    # hoop3()
+    # hoop4()
 
-        sendmsg('land')
+    sendmsg('land')
 
-        print('\nGreat Flight!!!')
+    print('\nGreat Flight!!!')
+    #if ready.lower() == 'yes' or ready.lower() == 'y':
 
-    else:
-        print('\nMake sure you check WIFI, surroundings, co-pilot is ready, re-run program\n')
+
+    #else:
+        #print('\nMake sure you check WIFI, surroundings, co-pilot is ready, re-run program\n')
 except KeyboardInterrupt:
     sendmsg('emergency')
 
