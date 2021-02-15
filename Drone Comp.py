@@ -6,7 +6,7 @@ import threading, socket, sys, time, subprocess
 
 # GLOBAL VARIABLES DECLARED HERE....
 host = ''
-port = 8000
+port = 4829
 locaddr = (host, port)
 tello_address = ('192.168.10.1', 8889)  # Get the Tello drone's address
 
@@ -27,7 +27,7 @@ def recv():
             break
 
 
-def sendmsg(msg, sleep=6):
+def sendmsg(msg, sleep=8):
     print("Sending: " + msg)
     msg = msg.encode(encoding="utf-8")
     sock.sendto(msg, tello_address)
@@ -49,16 +49,19 @@ def hoop1():
 
 # Drone mission through second hoop
 def hoop2():
-    sendmsg("go 300 0 65 50", 9)
+    sendmsg("go 225 0 55 50", 9)
 
 
 
 # Drone mission through third hoop
 def hoop3():
-    print("hi")
+    sendmsg("ccw 90")
+    sendmsg("curve 100 -100 0 250 0 0 50", 10)
+    sendmsg("ccw 90")
+    sendmsg("forward 100")
 
 def hoop4():
-    print("hi")
+    sendmsg("go 225 0 - 50", 9)
 
 
 print("\nAlex Symanzik")
@@ -72,12 +75,12 @@ try:
     print("\nStarting Drone!\n")
 
     sendmsg('command', 0)
-    sendmsg('takeoff')
+    sendmsg('takeoff', 9)
 
     hoop1()
     hoop2()
-    # hoop3()
-    # hoop4()
+    hoop3()
+    #hoop4()
 
     sendmsg('land')
 
@@ -90,5 +93,5 @@ try:
 except KeyboardInterrupt:
     sendmsg('emergency')
 
-breakr = True
+breakr = True8000
 sock.close()
