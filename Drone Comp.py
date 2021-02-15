@@ -58,10 +58,11 @@ def hoop3():
     sendmsg("ccw 90")
     sendmsg("curve 100 -100 0 250 0 0 50", 10)
     sendmsg("ccw 90")
-    sendmsg("forward 100")
+    sendmsg("forward 200")
 
 def hoop4():
-    sendmsg("go 225 0 - 50", 9)
+    sendmsg("go 225 0 -55 50", 9)
+    sendmsg("flip b", 5)
 
 
 print("\nAlex Symanzik")
@@ -80,7 +81,7 @@ try:
     hoop1()
     hoop2()
     hoop3()
-    #hoop4()
+    hoop4()
 
     sendmsg('land')
 
