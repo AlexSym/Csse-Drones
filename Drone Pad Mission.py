@@ -6,7 +6,7 @@ import threading, socket, sys, time, subprocess
 
 # GLOBAL VARIABLES DECLARED HERE....
 host = ''
-port = 4829
+port = 9000
 locaddr = (host, port)
 tello_address = ('192.168.10.1', 8889)  # Get the Tello drone's address
 
@@ -27,7 +27,7 @@ def recv():
             break
 
 
-def sendmsg(msg, sleep=8):
+def sendmsg(msg, sleep=6):
     print("Sending: " + msg)
     msg = msg.encode(encoding="utf-8")
     sock.sendto(msg, tello_address)
@@ -41,58 +41,60 @@ recvThread.start()
 
 # CREATE FUNCTIONS HERE....
 
-# Drone mission through first hoop
+# square function with a for loop
+def square():
+    for i in range(4):
+        sendmsg('foward 100')
+        sendmsg('cw 90')
+
+
 def hoop1():
-    sendmsg("up 65")
-    sendmsg("forward 250")
+    sendmsg("up 60")
+    sendmsg("forward 170")
 
-
-# Drone mission through second hoop
 def hoop2():
-    sendmsg("go 225 0 55 50", 9)
+    sendmsg("down 10")
+    sendmsg("forward 50")
 
-
-
-# Drone mission through third hoop
 def hoop3():
     sendmsg("ccw 90")
-    sendmsg("curve 100 -100 0 250 0 0 50", 10)
+    sendmsg("forward 130")
     sendmsg("ccw 90")
-    sendmsg("forward 200")
-
+    sendmsg("forward 50")
 def hoop4():
-    sendmsg("go 225 0 -55 50", 9)
-    sendmsg("flip b")
-
+    sendmsg("forward 170")
+    sendmsg("ccw 90")
+    sendmsg("forward 130")
 
 print("\nAlex Symanzik")
-print("Program Name: Drone Flying Comp")
-print("Date: 11/13/2020")
+print("Program Name: Drone Flying School")
+print("Date: 11/6/2020")
 print("\n****CHECK YOUR TELLO WIFI ADDRESS****")
 print("\n****CHECK SURROUNDING AREA BEFORE FLIGHT****")
-#ready = input('\nAre you ready to take flight: ')
+ready = input('\nAre you ready to take flight: ')
 
 try:
-    print("\nStarting Drone!\n")
+    if ready.lower() == 'yes' or ready.lower() == 'y':
+        print("\nStarting Drone!\n")
 
-    sendmsg('command', 0)
-    sendmsg('takeoff', 9)
+        sendmsg('command', 0)
+        sendmsg('takeoff')
 
-    hoop1()
-    hoop2()
-    hoop3()
-    hoop4()
+        # square()
 
-    sendmsg('land')
+        hoop1()
+        hoop2()
+        hoop3()
+        hoop4()
 
-    print('\nGreat Flight!!!')
-    #if ready.lower() == 'yes' or ready.lower() == 'y':
+        sendmsg('land')
 
+        print('\nGreat Flight!!!')
 
-    #else:
-        #print('\nMake sure you check WIFI, surroundings, co-pilot is ready, re-run program\n')
+    else:
+        print('\nMake sure you check WIFI, surroundings, co-pilot is ready, re-run program\n')
 except KeyboardInterrupt:
     sendmsg('emergency')
 
-breakr = True8000
+breakr = True
 sock.close()
